@@ -34,17 +34,17 @@ SELECT DISTINCT ON (emp_no) emp_no,
 ORDER BY emp_no, to_date DESC;
 ```
 From the PostgreSQL Documentation regarding `DISTINCT ON()`:
-```
-SELECT DISTINCT ON (expression [, ...]) keeps only the first row of each set of rows where the given expressions evaluate to equal.
-Note that the "first row" of each set is unpredictable unless ORDER BY is used to ensure that the desired row appears first.
-```
+
+>SELECT DISTINCT ON (expression [, ...]) keeps only the first row of each set of rows where the given expressions evaluate to equal.
+>Note that the "first row" of each set is unpredictable unless ORDER BY is used to ensure that the desired row appears first.
+
 So when applying `DISTINCT ON()` to a emp_no column with `ORDER BY` column `to_date DESC` we can be sure that we get employees with their most recent titles.
 
 Retiring Titles table was created by using data from Unique Titles. Counting titles and creating its result in as a new column with a "count" name gives an ability to see in an output both - number of titles and their names:
 ```
 SELECT COUNT(title) AS "count", title
 ```
-Grouping by tile column shows the total number of employees with a split per their titles. And the result is sorted in a descending order:
+Grouping by title column shows the total number of employees with a split per their titles. And the result is sorted in a descending order:
 ```
 GROUP BY title
 ORDER BY count DESC;
@@ -109,8 +109,8 @@ If we expand mentorship program to all employees who were born between 1961 and 
 
 This covers vacancies in the nearest future if we are talking about all employees who were born between 1952 and 1955. The split by title of expanded mentorship program list is also on the same level as the split for retirement-age employees:
 
-| *Expanded Mentorship Program by Title:* | *Retirement-age Employees by Title:* |
-| --------------------------------------- | ------------------------------------ |
+| *Expanded Mentorship Program by Title<br/>(born 1961 - 1965):* | *Retirement-age Employees by Title<br/>(born 1952 - 1955):* |
+| -------------------------------------------------------------- | ----------------------------------------------------------- |
 | ![mentorship_titles_expanded](Analysis/mentorship_titles_expanded.png) | ![retiring_titles](Analysis/retiring_titles.png) |
 
 
